@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'widgets/lat_snackbar.dart';
+import 'package:flutter_latihan/widgets/lat_textfield.dart';
+import 'widgets/lat_dropdown.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: lat_snackbar(),
+      home: lat_dropdown(),
     );
   }
 }
