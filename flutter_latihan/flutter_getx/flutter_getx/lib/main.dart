@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import './controllers/counter.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,10 +33,16 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Obx(() => Text(
-                  "${counterController.count}",
-                  style: TextStyle(fontSize: 60),
-                )),
+            // Obx(() => Text(
+            //       "${counterController.count}",
+            //       style: TextStyle(fontSize: 60),
+            //     )),
+            GetBuilder<CounterController>(
+              builder: (controller) => Text(
+                "${counterController.count}",
+                style: TextStyle(fontSize: 60),
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -50,6 +59,15 @@ class HomePage extends StatelessWidget {
                   child: Text("+"),
                 )
               ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                counterController.updateCounter();
+              },
+              child: Text("Refresh"),
             ),
             SizedBox(
               height: 20,
@@ -150,16 +168,5 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class CounterController extends GetxController {
-  var count = 0.obs;
-  increment() {
-    count = count + 1;
-  }
-
-  decrement() {
-    count = count - 1;
   }
 }
