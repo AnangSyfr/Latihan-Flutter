@@ -4,11 +4,17 @@ import '../controllers/auth.dart';
 import 'package:get_storage/get_storage.dart';
 
 class LoginPage extends StatelessWidget {
-  final authC = Get.put(Auth());
   final box = GetStorage();
+  final Auth authC = Get.put(Auth());
 
   @override
   Widget build(BuildContext context) {
+    print(box.read('datauser'));
+    if (box.read('datauser') != null) {
+      authC.isRemember.value = true;
+      authC.username.text = box.read('datauser')['username'];
+      authC.password.text = box.read('datauser')['password'];
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text("Login"),
@@ -42,6 +48,16 @@ class LoginPage extends StatelessWidget {
           ),
           SizedBox(
             height: 20,
+          ),
+          Obx(
+            () => CheckboxListTile(
+              controlAffinity: ListTileControlAffinity.leading,
+              value: authC.isRemember.value,
+              onChanged: (value) {
+                authC.isRemember.toggle();
+              },
+              title: Text("Ingat Saya?"),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
