@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:test_cli/app/routes/app_pages.dart';
 
 import '../controllers/products_controller.dart';
+import '../views/product_item_view.dart';
 
 class ProductsView extends GetView<ProductsController> {
   @override
@@ -16,9 +17,8 @@ class ProductsView extends GetView<ProductsController> {
       body: Obx(
         () => ListView.builder(
           itemCount: controller.allProducts.length,
-          itemBuilder: (context, index) => ListTile(
-            title: Text("${controller.allProducts[index]["nama"]}"),
-          ),
+          itemBuilder: (context, index) =>
+              ProductItem(data: controller.allProducts[index]),
         ),
       ),
       floatingActionButton: FloatingActionButton(

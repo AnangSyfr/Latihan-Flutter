@@ -18,4 +18,15 @@ class ProductsController extends GetxController {
       "harga": 30000,
     }
   ].obs;
+
+  void addProduct(String name, String price) {
+    if (name.isNotEmpty && price.isNotEmpty) {
+      allProducts.add({
+        "id": DateTime.now().toIso8601String(),
+        "nama": name,
+        "harga": int.parse(price)
+      });
+      Get.back();
+    }
+  }
 }
